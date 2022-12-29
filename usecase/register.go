@@ -1,14 +1,14 @@
 package usecase
 
 import (
-	"github.com/enfil/metamask-auth/pkg/contract/service"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
-	"github.com/enfil/metamask-auth/pkg/usecase/command"
+	"github.com/enfil/metamask-auth/contract/service"
+	user2 "github.com/enfil/metamask-auth/domain/user"
+	"github.com/enfil/metamask-auth/usecase/command"
 	"strings"
 )
 
 type Registrar struct {
-	Repo          user.Repository
+	Repo          user2.Repository
 	NonceProvider contract.NonceProvider
 }
 
@@ -17,7 +17,7 @@ func (r *Registrar) Handle(c command.Register) error {
 	if err != nil {
 		return err
 	}
-	u, err := user.New(strings.ToLower(c.CryptoAddress), nonce, "")
+	u, err := user2.New(strings.ToLower(c.CryptoAddress), nonce, "")
 	if err != nil {
 		return err
 	}

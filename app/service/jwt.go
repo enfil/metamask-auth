@@ -2,7 +2,7 @@ package service
 
 import (
 	"fmt"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/domain/user"
 	"github.com/golang-jwt/jwt/v4"
 	"time"
 )

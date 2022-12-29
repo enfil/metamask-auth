@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/domain/user"
 )
 
 type UserReadModel interface {

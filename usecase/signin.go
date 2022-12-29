@@ -1,16 +1,16 @@
 package usecase
 
 import (
-	contract2 "github.com/enfil/metamask-auth/pkg/contract/service"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
-	"github.com/enfil/metamask-auth/pkg/usecase/command"
+	"github.com/enfil/metamask-auth/contract/service"
+	user2 "github.com/enfil/metamask-auth/domain/user"
+	"github.com/enfil/metamask-auth/usecase/command"
 	"strings"
 )
 
 type SignIn struct {
-	Repo          user.Repository
-	NonceProvider contract2.NonceProvider
-	SignProvider  contract2.SignProvider
+	Repo          user2.Repository
+	NonceProvider contract.NonceProvider
+	SignProvider  contract.SignProvider
 }
 
 func (r SignIn) Handle(c command.SignIn) error {
@@ -19,7 +19,7 @@ func (r SignIn) Handle(c command.SignIn) error {
 		return err
 	}
 	if u.Nonce() != c.Nonce {
-		return user.ErrAuthError
+		return user2.ErrAuthError
 	}
 
 	err = r.SignProvider.Check(u.CryptoAddress(), c.Nonce, c.Sig)

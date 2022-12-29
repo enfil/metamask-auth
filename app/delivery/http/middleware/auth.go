@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"github.com/enfil/metamask-auth/app/reader"
-	"github.com/enfil/metamask-auth/pkg/contract/service"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/contract/service"
+	"github.com/enfil/metamask-auth/domain/user"
 	"net/http"
 )
 

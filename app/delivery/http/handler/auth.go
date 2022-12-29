@@ -4,10 +4,10 @@ import (
 	"github.com/enfil/metamask-auth/app/delivery/http/request"
 	"github.com/enfil/metamask-auth/app/delivery/http/response"
 	"github.com/enfil/metamask-auth/app/reader"
-	"github.com/enfil/metamask-auth/pkg/contract/service"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
-	"github.com/enfil/metamask-auth/pkg/usecase"
-	"github.com/enfil/metamask-auth/pkg/usecase/command"
+	"github.com/enfil/metamask-auth/contract/service"
+	user2 "github.com/enfil/metamask-auth/domain/user"
+	usecase2 "github.com/enfil/metamask-auth/usecase"
+	command2 "github.com/enfil/metamask-auth/usecase/command"
 	"github.com/go-chi/chi"
 	"net/http"
 	"strings"
@@ -16,13 +16,13 @@ import (
 type Auth struct {
 	TokenProvider contract.TokenProvider
 	UserReader    reader.User
-	Registrar     usecase.Registrar
-	SignIn        usecase.SignIn
+	Registrar     usecase2.Registrar
+	SignIn        usecase2.SignIn
 }
 
 func (auth *Auth) RegistrationHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var c command.Register
+		var c command2.Register
 		if err := request.BindReqBody(r, &c); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
@@ -41,7 +41,7 @@ func (auth *Auth) RegistrationHandler() http.HandlerFunc {
 func (auth *Auth) UserNonceHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		address := chi.URLParam(r, "address")
-		if !user.HexRegex.MatchString(address) {
+		if !user2.HexRegex.MatchString(address) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -64,7 +64,7 @@ func (auth *Auth) UserNonceHandler() http.HandlerFunc {
 
 func (auth *Auth) SignInHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var c command.SignIn
+		var c command2.SignIn
 		if err := request.BindReqBody(r, &c); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
@@ -103,13 +103,13 @@ func (auth *Auth) WelcomeHandler() http.HandlerFunc {
 
 func writeErrorHeaders(err error, w http.ResponseWriter) {
 	switch err {
-	case user.ErrUserNotExists:
+	case user2.ErrUserNotExists:
 		w.WriteHeader(http.StatusNotFound)
-	case user.ErrUserExists:
+	case user2.ErrUserExists:
 		w.WriteHeader(http.StatusConflict)
-	case user.ErrInvalidAddress:
+	case user2.ErrInvalidAddress:
 		w.WriteHeader(http.StatusBadRequest)
-	case user.ErrAuthError:
+	case user2.ErrAuthError:
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	default:

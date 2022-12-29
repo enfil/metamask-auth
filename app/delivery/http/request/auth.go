@@ -2,7 +2,7 @@ package request
 
 import (
 	"encoding/json"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/domain/user"
 	"net/http"
 )
 

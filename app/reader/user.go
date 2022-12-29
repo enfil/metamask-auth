@@ -1,8 +1,8 @@
 package reader
 
 import (
-	"github.com/enfil/metamask-auth/pkg/contract/reader"
-	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/contract/reader"
+	"github.com/enfil/metamask-auth/domain/user"
 	"strings"
 )
 
