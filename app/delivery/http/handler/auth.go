@@ -5,8 +5,8 @@ import (
 	"github.com/enfil/metamask-auth/app/delivery/http/response"
 	"github.com/enfil/metamask-auth/app/reader"
 	"github.com/enfil/metamask-auth/contract/service"
-	user2 "github.com/enfil/metamask-auth/domain/user"
-	usecase2 "github.com/enfil/metamask-auth/usecase"
+	"github.com/enfil/metamask-auth/domain/user"
+	"github.com/enfil/metamask-auth/usecase"
 	command2 "github.com/enfil/metamask-auth/usecase/command"
 	"github.com/go-chi/chi"
 	"net/http"
@@ -16,8 +16,8 @@ import (
 type Auth struct {
 	TokenProvider contract.TokenProvider
 	UserReader    reader.User
-	Registrar     usecase2.Registrar
-	SignIn        usecase2.SignIn
+	Registrar     usecase.Registrar
+	SignIn        usecase.SignIn
 }
 
 func (auth *Auth) RegistrationHandler() http.HandlerFunc {
@@ -41,7 +41,7 @@ func (auth *Auth) RegistrationHandler() http.HandlerFunc {
 func (auth *Auth) UserNonceHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		address := chi.URLParam(r, "address")
-		if !user2.HexRegex.MatchString(address) {
+		if !user.HexRegex.MatchString(address) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -103,13 +103,13 @@ func (auth *Auth) WelcomeHandler() http.HandlerFunc {
 
 func writeErrorHeaders(err error, w http.ResponseWriter) {
 	switch err {
-	case user2.ErrUserNotExists:
+	case user.ErrUserNotExists:
 		w.WriteHeader(http.StatusNotFound)
-	case user2.ErrUserExists:
+	case user.ErrUserExists:
 		w.WriteHeader(http.StatusConflict)
-	case user2.ErrInvalidAddress:
+	case user.ErrInvalidAddress:
 		w.WriteHeader(http.StatusBadRequest)
-	case user2.ErrAuthError:
+	case user.ErrAuthError:
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	default:

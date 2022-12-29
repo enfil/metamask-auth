@@ -8,7 +8,7 @@ import (
 	"github.com/enfil/metamask-auth/app/reader"
 	"github.com/enfil/metamask-auth/app/repository/user/memory"
 	"github.com/enfil/metamask-auth/app/service"
-	usecase2 "github.com/enfil/metamask-auth/usecase"
+	"github.com/enfil/metamask-auth/usecase"
 	"log"
 	"net/http"
 	"time"
@@ -29,8 +29,8 @@ var (
 	signProvider  = service.Sign{}
 	authHandler   = handler.Auth{
 		TokenProvider: jwtProvider,
-		Registrar:     usecase2.Registrar{Repo: userRepo, NonceProvider: &nonceProvider},
-		SignIn:        usecase2.SignIn{Repo: userRepo, NonceProvider: &nonceProvider, SignProvider: signProvider},
+		Registrar:     usecase.Registrar{Repo: userRepo, NonceProvider: &nonceProvider},
+		SignIn:        usecase.SignIn{Repo: userRepo, NonceProvider: &nonceProvider, SignProvider: signProvider},
 		UserReader:    reader.User{ReadModel: userRepo},
 	}
 	authMiddleware = middleware.Auth{
