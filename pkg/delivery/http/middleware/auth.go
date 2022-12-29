@@ -10,8 +10,8 @@ import (
 )
 
 type Auth struct {
-	JwtProvider contract.JwtProvider
-	UserReader  reader.User
+	TokenProvider contract.TokenProvider
+	UserReader    reader.User
 }
 
 func (auth *Auth) Handle() func(next http.Handler) http.Handler {
@@ -29,7 +29,7 @@ func (auth *Auth) Handle() func(next http.Handler) http.Handler {
 				return
 			}
 
-			subj, err := auth.JwtProvider.VerifyAndGetSubject(tokenString)
+			subj, err := auth.TokenProvider.VerifyAndGetSubject(tokenString)
 			if err != nil {
 				w.WriteHeader(http.StatusUnauthorized)
 				return

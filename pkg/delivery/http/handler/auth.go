@@ -14,10 +14,10 @@ import (
 )
 
 type Auth struct {
-	JwtProvider contract.JwtProvider
-	UserReader  reader.User
-	Registrar   usecase.Registrar
-	SignIn      usecase.SignIn
+	TokenProvider contract.TokenProvider
+	UserReader    reader.User
+	Registrar     usecase.Registrar
+	SignIn        usecase.SignIn
 }
 
 func (auth *Auth) RegistrationHandler() http.HandlerFunc {
@@ -75,7 +75,7 @@ func (auth *Auth) SignInHandler() http.HandlerFunc {
 			writeErrorHeaders(err, w)
 			return
 		}
-		signedToken, err := auth.JwtProvider.Create(c.CryptoAddress)
+		signedToken, err := auth.TokenProvider.Create(c.CryptoAddress)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return

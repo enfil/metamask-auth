@@ -28,14 +28,14 @@ var (
 	nonceProvider = service.Nonce{}
 	signProvider  = service.Sign{}
 	authHandler   = handler.Auth{
-		JwtProvider: jwtProvider,
-		Registrar:   usecase.Registrar{Repo: userRepo, NonceProvider: &nonceProvider},
-		SignIn:      usecase.SignIn{Repo: userRepo, NonceProvider: &nonceProvider, SignProvider: signProvider},
-		UserReader:  reader.User{ReadModel: userRepo},
+		TokenProvider: jwtProvider,
+		Registrar:     usecase.Registrar{Repo: userRepo, NonceProvider: &nonceProvider},
+		SignIn:        usecase.SignIn{Repo: userRepo, NonceProvider: &nonceProvider, SignProvider: signProvider},
+		UserReader:    reader.User{ReadModel: userRepo},
 	}
 	authMiddleware = middleware.Auth{
-		JwtProvider: jwtProvider,
-		UserReader:  reader.User{ReadModel: userRepo},
+		TokenProvider: jwtProvider,
+		UserReader:    reader.User{ReadModel: userRepo},
 	}
 )
 
