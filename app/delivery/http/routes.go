@@ -1,8 +1,8 @@
 package delivery
 
 import (
-	"github.com/enfil/metamask-auth/pkg/delivery/http/handler"
-	"github.com/enfil/metamask-auth/pkg/delivery/http/middleware"
+	"github.com/enfil/metamask-auth/app/delivery/http/handler"
+	"github.com/enfil/metamask-auth/app/delivery/http/middleware"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 )

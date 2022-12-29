@@ -1,13 +1,13 @@
 package handler
 
 import (
-	contract "github.com/enfil/metamask-auth/internal/contract/service"
-	"github.com/enfil/metamask-auth/internal/domain/user"
-	"github.com/enfil/metamask-auth/internal/usecase"
-	"github.com/enfil/metamask-auth/internal/usecase/command"
-	"github.com/enfil/metamask-auth/pkg/delivery/http/request"
-	"github.com/enfil/metamask-auth/pkg/delivery/http/response"
-	"github.com/enfil/metamask-auth/pkg/reader"
+	"github.com/enfil/metamask-auth/app/delivery/http/request"
+	"github.com/enfil/metamask-auth/app/delivery/http/response"
+	"github.com/enfil/metamask-auth/app/reader"
+	"github.com/enfil/metamask-auth/pkg/contract/service"
+	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/pkg/usecase"
+	"github.com/enfil/metamask-auth/pkg/usecase/command"
 	"github.com/go-chi/chi"
 	"net/http"
 	"strings"

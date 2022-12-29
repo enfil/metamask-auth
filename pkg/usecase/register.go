@@ -1,9 +1,9 @@
 package usecase
 
 import (
-	contract "github.com/enfil/metamask-auth/internal/contract/service"
-	"github.com/enfil/metamask-auth/internal/domain/user"
-	"github.com/enfil/metamask-auth/internal/usecase/command"
+	"github.com/enfil/metamask-auth/pkg/contract/service"
+	"github.com/enfil/metamask-auth/pkg/domain/user"
+	"github.com/enfil/metamask-auth/pkg/usecase/command"
 	"strings"
 )
 

@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/enfil/metamask-auth/internal/domain/user/vo"
+	"github.com/enfil/metamask-auth/pkg/domain/user/vo"
 	"github.com/google/uuid"
 	"regexp"
 )

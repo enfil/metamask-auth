@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/enfil/metamask-auth/internal/usecase"
-	"github.com/enfil/metamask-auth/pkg/config"
-	delivery "github.com/enfil/metamask-auth/pkg/delivery/http"
-	"github.com/enfil/metamask-auth/pkg/delivery/http/handler"
-	"github.com/enfil/metamask-auth/pkg/delivery/http/middleware"
-	"github.com/enfil/metamask-auth/pkg/reader"
-	"github.com/enfil/metamask-auth/pkg/repository/user/memory"
-	"github.com/enfil/metamask-auth/pkg/service"
+	"github.com/enfil/metamask-auth/app/config"
+	delivery "github.com/enfil/metamask-auth/app/delivery/http"
+	"github.com/enfil/metamask-auth/app/delivery/http/handler"
+	"github.com/enfil/metamask-auth/app/delivery/http/middleware"
+	"github.com/enfil/metamask-auth/app/reader"
+	"github.com/enfil/metamask-auth/app/repository/user/memory"
+	"github.com/enfil/metamask-auth/app/service"
+	"github.com/enfil/metamask-auth/pkg/usecase"
 	"log"
 	"net/http"
 	"time"

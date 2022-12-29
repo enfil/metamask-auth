@@ -1,7 +1,7 @@
 package memory
 
 import (
-	"github.com/enfil/metamask-auth/internal/domain/user"
+	"github.com/enfil/metamask-auth/pkg/domain/user"
 	"sync"
 )
 

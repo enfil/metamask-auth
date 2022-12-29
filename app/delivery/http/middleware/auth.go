@@ -3,9 +3,9 @@ package middleware
 import (
 	"context"
 	"errors"
-	contract "github.com/enfil/metamask-auth/internal/contract/service"
-	"github.com/enfil/metamask-auth/internal/domain/user"
-	"github.com/enfil/metamask-auth/pkg/reader"
+	"github.com/enfil/metamask-auth/app/reader"
+	"github.com/enfil/metamask-auth/pkg/contract/service"
+	"github.com/enfil/metamask-auth/pkg/domain/user"
 	"net/http"
 )
 
