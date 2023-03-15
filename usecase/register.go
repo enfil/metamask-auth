@@ -4,6 +4,7 @@ import (
 	"github.com/enfil/metamask-auth/contract/service"
 	"github.com/enfil/metamask-auth/domain/user"
 	"github.com/enfil/metamask-auth/usecase/command"
+	"github.com/google/uuid"
 	"strings"
 )
 
@@ -17,7 +18,7 @@ func (r *Registrar) Handle(c command.Register) error {
 	if err != nil {
 		return err
 	}
-	u, err := user.New(strings.ToLower(c.CryptoAddress), nonce, "")
+	u, err := user.New(uuid.New(), strings.ToLower(c.CryptoAddress), nonce, "")
 	if err != nil {
 		return err
 	}

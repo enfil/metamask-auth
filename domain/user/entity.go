@@ -16,13 +16,13 @@ type Entity struct {
 	auth vo.AuthorizationData
 }
 
-func New(cryptoAddress string, nonce string, sig string) (Entity, error) {
+func New(uuid uuid.UUID, cryptoAddress string, nonce string, sig string) (Entity, error) {
 	err := matchAddress(cryptoAddress)
 	if err != nil {
 		return Entity{}, err
 	}
 	return Entity{
-		uuid: uuid.New(),
+		uuid: uuid,
 		auth: vo.AuthorizationData{
 			CryptoAddress: cryptoAddress,
 			Nonce:         nonce,
@@ -30,7 +30,6 @@ func New(cryptoAddress string, nonce string, sig string) (Entity, error) {
 		},
 	}, nil
 }
-
 func (u Entity) Edit(cryptoAddress string, nonce string, sig string) error {
 	if err := validate(cryptoAddress, nonce, sig); err != nil {
 		return err
