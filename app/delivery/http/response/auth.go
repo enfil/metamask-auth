@@ -2,8 +2,14 @@ package response
 
 import (
 	"encoding/json"
+	"github.com/google/uuid"
 	"net/http"
 )
+
+type CheckAuthResponse struct {
+	Uuid          uuid.UUID
+	CryptoAddress string
+}
 
 func RenderJson(r *http.Request, w http.ResponseWriter, statusCode int, res interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8 ")

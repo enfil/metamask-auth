@@ -5,7 +5,7 @@ import (
 	"github.com/enfil/metamask-auth/app/delivery/http/request"
 	"github.com/enfil/metamask-auth/app/delivery/http/response"
 	"github.com/enfil/metamask-auth/app/reader"
-	"github.com/enfil/metamask-auth/contract/service"
+	contract "github.com/enfil/metamask-auth/contract/service"
 	"github.com/enfil/metamask-auth/domain/user"
 	"github.com/enfil/metamask-auth/usecase"
 	command2 "github.com/enfil/metamask-auth/usecase/command"
@@ -119,7 +119,8 @@ func (auth *Auth) CheckAuthHandler() http.HandlerFunc {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		response.RenderJson(r, w, http.StatusOK, u)
+		resp := response.CheckAuthResponse{u.Uuid(), u.CryptoAddress()}
+		response.RenderJson(r, w, http.StatusOK, resp)
 	}
 }
 
