@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"github.com/enfil/metamask-auth/app/delivery/http/request"
 	"github.com/enfil/metamask-auth/app/delivery/http/response"
 	"github.com/enfil/metamask-auth/app/reader"
@@ -86,6 +87,39 @@ func (auth *Auth) SignInHandler() http.HandlerFunc {
 			AccessToken: signedToken,
 		}
 		response.RenderJson(r, w, http.StatusOK, resp)
+	}
+}
+
+func (auth *Auth) CheckAuthHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		headerValue := r.Header.Get("Authorization")
+		const prefix = "Bearer "
+		if len(headerValue) < len(prefix) {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		tokenString := headerValue[len(prefix):]
+		if len(tokenString) == 0 {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+
+		subj, err := auth.TokenProvider.VerifyAndGetSubject(tokenString)
+		if err != nil {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+
+		u, err := auth.UserReader.ByAddress(subj)
+		if err != nil {
+			if errors.Is(err, user.ErrUserNotExists) {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		response.RenderJson(r, w, http.StatusOK, u)
 	}
 }
 
