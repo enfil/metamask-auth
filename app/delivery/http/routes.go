@@ -14,6 +14,7 @@ func RegisterRoutes(r *chi.Mux, authHandler handler.Auth, authMiddleware middlew
 	r.Post("/register", authHandler.RegistrationHandler())
 	r.Get("/users/{address:^0x[a-fA-F0-9]{40}$}/nonce", authHandler.UserNonceHandler())
 	r.Post("/signin", authHandler.SignInHandler())
+	r.Get("/check-auth", authHandler.CheckAuthHandler())
 	r.Group(func(r chi.Router) {
 		r.Use(authMiddleware.Handle())
 		r.Get("/welcome", authHandler.WelcomeHandler())
