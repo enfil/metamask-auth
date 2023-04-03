@@ -30,7 +30,7 @@ func New(uuid uuid.UUID, cryptoAddress string, nonce string, sig string) (Entity
 		},
 	}, nil
 }
-func (u Entity) Edit(cryptoAddress string, nonce string, sig string) error {
+func (u *Entity) Edit(cryptoAddress string, nonce string, sig string) error {
 	if err := validate(cryptoAddress, nonce, sig); err != nil {
 		return err
 	}
@@ -40,19 +40,23 @@ func (u Entity) Edit(cryptoAddress string, nonce string, sig string) error {
 	return nil
 }
 
-func (u Entity) Uuid() uuid.UUID {
+func (u *Entity) Uuid() uuid.UUID {
 	return u.uuid
 }
 
-func (u Entity) CryptoAddress() string {
+func (u *Entity) CryptoAddress() string {
 	return u.auth.CryptoAddress
 }
 
-func (u Entity) Nonce() string {
+func (u *Entity) Nonce() string {
 	return u.auth.Nonce
 }
 
-func (u Entity) SetNonce(nonce string) {
+func (u *Entity) Sig() string {
+	return u.auth.Sig
+}
+
+func (u *Entity) SetNonce(nonce string) {
 	u.auth.Nonce = nonce
 }
 

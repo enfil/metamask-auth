@@ -8,7 +8,7 @@ import (
 	contract "github.com/enfil/metamask-auth/contract/service"
 	"github.com/enfil/metamask-auth/domain/user"
 	"github.com/enfil/metamask-auth/usecase"
-	command2 "github.com/enfil/metamask-auth/usecase/command"
+	command "github.com/enfil/metamask-auth/usecase/command"
 	"github.com/go-chi/chi"
 	"net/http"
 	"strings"
@@ -23,7 +23,7 @@ type Auth struct {
 
 func (auth *Auth) RegistrationHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var c command2.Register
+		var c command.Register
 		if err := request.BindReqBody(r, &c); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
@@ -65,7 +65,7 @@ func (auth *Auth) UserNonceHandler() http.HandlerFunc {
 
 func (auth *Auth) SignInHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var c command2.SignIn
+		var c command.SignIn
 		if err := request.BindReqBody(r, &c); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
