@@ -119,7 +119,7 @@ func (auth *Auth) CheckAuthHandler() http.HandlerFunc {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		resp := response.CheckAuthResponse{u.Uuid(), u.CryptoAddress()}
+		resp := response.CheckAuthResponse{Uuid: u.Uuid(), CryptoAddress: u.CryptoAddress()}
 		response.RenderJson(r, w, http.StatusOK, resp)
 	}
 }
